@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maintenance | Starter Pack for Style Guides</title>
+    <link rel="stylesheet" type="text/css" href="patterns.css">
+    <link rel="stylesheet" type="text/css" href="prism.css">
+</head>
+<body>
+
+    <main class="style-wrapper">
+        <header class="style-masthead">
+            <div class="style-breadcrumbs">
+                Style Guide
+            </div>
+
+            <h1 class="style-name">Maintenance</h1>
+        </header>
+
+        <article class="style-content">
+            <p class="style-description">Maintaining the style guide is a manual process. Any time the Sass is updated, the changes should be reflected here.</p>
+
+            <section>
+                <h2 class="style-headline">Handlebars Introduction</h2>
+                <p>In order to lower maintenance overhead, the style guide is built using <a href="http://handlebarsjs.com/" target="_blank">Handlebars</a>, which allows you to create reusable template files and then specify the content for that page using a JSON object. You can learn more about this by following the <a href="https://www.sitepoint.com/a-beginners-guide-to-handlebars/" target="_blank">Beginner's Guide to Handlebars</a>.</p>
+            </section>
+
+            <section>
+                <h2 class="style-headline">Updating Page Content</h2>
+                <p>With the exception of the index pages and this page, all pages in the style guide utilize Handlebars. To edit a particular page's content, you will need to modify the JSON object, which can be found in a script tag in the HTML file for that page. The JSON object should be setup as such:</p>
+                
+                <pre><code class="language-javascript">
+                    var context = {
+                        'category' : 'Section of the Style Guide',
+                        'title' : 'Title of the Page',
+                        'description' : 'Brief description about the use and function of the pattern.',
+                        'sections' : [
+                            {
+                                'sectionName' : 'Base',
+                                'sectionIdentifier' : 'base',
+                                'sectionStatus' : 'Ready',
+                                'sectionBadge' : '',
+                                'snippets' : [
+                                    {
+                                        'snippetDescription' : 'Description for the base.',
+                                        'snippetLanguage' : '',
+                                        'snippetCode' : '&lt;div class="base">&lt;/div>'
+                                    }
+                                ]
+                            },
+                            {
+                                'sectionName' : 'Modifier',
+                                'sectionIdentifier' : 'modifier',
+                                'sectionStatus' : 'Ready',
+                                'sectionBadge' : '',
+                                'snippets' : [
+                                    {
+                                        'snippetDescription' : 'Description for the modifier.',
+                                        'snippetLanguage' : '',
+                                        'snippetCode' : '&lt;div class="base modifier">&lt;/div>'
+                                    },
+                                    {
+                                        'snippetDescription' : 'Description for the modifier\'s second snippet.',
+                                        'snippetLanguage' : 'JavaScript',
+                                        'snippetCode' : '$(\'.base.modifier\').on(\'click\', function() {\n    ...\n});'
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+                </code></pre>
+
+                <p>The page is then generated from the values you define in this JSON object. Here's what each variable means:</p>
+                <ol>
+                    <li><strong>category:</strong> The category the pattern falls under. Options are "Style Guide", "Design", "Structure", or "Patterns". This will appear at the top of the page above the page title.</li>
+                    <li><strong>title:</strong> The page title for the pattern. This is what will appear at the top of the page.</li>
+                    <li><strong>description:</strong> A brief description about the use and function of the pattern. This will appear below the title. You will need to escape any single quotation marks, like so <code>\'</code>. This variable also supports HTML.</li>
+                    <li><strong>sections:</strong> This variable contains an array of all of the sections on the page. You must have at least one section, but you can have as many as necessary. If you find yourself adding a lot of sections, you may want to consider breaking some of them out into their own pages. Each section is wrapped in <code>{}</code> and contains the following variables:
+                        <ol style="list-style-type: lower-alpha;">
+                            <li><strong>sectionName:</strong> The headline that will appear on the page for that section.</li>
+                            <li><strong>sectionIdentifier:</strong> The ID that is used to link directly to that section. Do not include <code>#</code>, just the text.</li>
+                            <li><strong>sectionStatus:</strong> The current status of this part of the pattern. Options are "Ready", "Testing", or "In Development". This is what will appear in the badge next to the section headline.</li>
+                            <li><strong>sectionBadge:</strong> The class modifier to change the color of the badge next to the section headline. Options are "style-badge-red" or "style-badge-yellow". The default is green and does not need a class.</li>
+                            <li><strong>snippets:</strong> Like sections, this variable contains an array of all of the code snippets and their accompanying descriptions for this section. This allows a single section to have multiple code snippets, which is useful if switching between languages or making large code chunks more digestible.
+                                <ol style="list-style-type: lower-roman;">
+                                    <li><strong>snippetDescription:</strong> A description for how this snippet's code works and any special considerations. You will need to escape any single quotation marks like so: <code>\'</code>. This variable also supports HTML.</li>
+                                    <li><strong>snippetLanguage:</strong> The language that the code block will be in. Options are "JavaScript", "SCSS", "PHP", or "Bash". If left blank, this will default to standard markup (HTML).</li>
+                                    <li><strong>snippetCode:</strong> The code that will be displayed for this snippet. Everything must be on one line, so you will need to use <code>\n</code> for line breaks, and enter four spaces for each indentation level. You do not need to escape any HTML, but <code>&lt;script&gt;</code> tags are not allowed. You will need to escape any single quotation marks using <code>\'</code>, which is shown in the code block above.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <p>If you're using Sublime Text, here's how to quickly end each line with <code>\n</code> and then put them all on a single line:</p>
+                <ol>
+                    <li>Highlight the code block except for the last line</li>
+                    <li>Use CTRL + SHIFT + L to convert the highlighted block to multiple highlighted lines</li>
+                    <li>Press the right arrow key to move the cursor to the end of each line</li>
+                    <li>Type <code>\n</code></li>
+                    <li>Press the DELETE key to remove the line breaks</li>
+                </ol>
+                <p>This will give you the format you need to paste into the JSON object while retaining where new lines were and the indentation levels. If there were lines that only contained whitespace, you may need to delete the line break itself still. You'll be able to tell if your code has this issue when you paste it into the variable and there are still line breaks.</p>
+            </section>
+
+            <section>
+                <h2 class="style-headline">Creating New Pages</h2>
+                <p>If you need to create a new page, navigate to the correct directory and copy the <code>template.html</code> file there. Rename it to something appropriate for the pattern, then update the HTML title tag and the JSON object as noted above. Open up your new page in the browser and make sure everything looks correct and is properly formatted. Next, you will need to add it to the navigation. To do this, open up <code>nav.js</code> in the main directory for this style guide and add the necessary variables for your new page. The JSON object for the navigation is setup as such:</p>
+                
+                <pre><code class="language-javascript">
+                    var navigation = {
+                        'navItems' : [
+                            {
+                                'navTitle' : 'Overview',
+                                'navLink' : '/style-guides/starter-pack/index.html',
+                                'navSubMenu' : []
+                            },
+                            {
+                                'navTitle' : 'Design',
+                                'navLink' : '/style-guides/starter-pack/design/index.html',
+                                'navSubMenu' : [
+                                    {
+                                        'subMenuTitle' : 'Typography',
+                                        'subMenuLink' : '/style-guides/starter-pack/design/typography.html'
+                                    },
+                                    {
+                                        'subMenuTitle' : 'Colors',
+                                        'subMenuLink' : '/style-guides/starter-pack/design/colors.html'
+                                    },
+                                    ...
+                                ]
+                            },
+                            {
+                                'navTitle' : 'Structure',
+                                'navLink' : '/style-guides/starter-pack/structure/index.html',
+                                'navSubMenu' : [
+                                    {
+                                        'subMenuTitle' : 'Layout',
+                                        'subMenuLink' : '/style-guides/starter-pack/structure/layout.html'
+                                    },
+                                    {
+                                        'subMenuTitle' : 'Grid System',
+                                        'subMenuLink' : '/style-guides/starter-pack/structure/grid.html'
+                                    },
+                                    ...
+                                ]
+                            },
+                            {
+                                'navTitle' : 'Patterns',
+                                'navLink' : '/style-guides/starter-pack/patterns/index.html',
+                                'navSubMenu' : [
+                                    {
+                                        'subMenuTitle' : 'Accordions',
+                                        'subMenuLink' : '/style-guides/starter-pack/patterns/accordions.html'
+                                    },
+                                    {
+                                        'subMenuTitle' : 'Breadcrumbs',
+                                        'subMenuLink' : '/style-guides/starter-pack/patterns/breadcrumbs.html'
+                                    },
+                                    ...
+                                ]
+                            },
+                            {
+                                'navTitle' : 'Style Guide Maintenance',
+                                'navLink' : '/style-guides/starter-pack/maintenance.html',
+                                'navSubMenu' : []
+                            },
+                        ]
+                    };
+                </code></pre>
+
+                <p>The <code>navItems</code> array contains the variables for each top level menu item, which includes the name of the page as it appears in the navigation (<code>navTitle</code>), the direct link to the page (<code>navLink</code>), and an array of its submenu pages if it has any (<code>navSubMenu</code>). If there aren't any sub-pages, use an empty array as shown for the "Overview" and "Style Guide Maintenance" pages. If it does have sub-pages, each sub-page includes a name (<code>subMenuTitle</code>) and a direct link (<code>subMenuLink</code>).</p>
+            </section>
+
+            <section>
+                <h2 class="style-headline">Updating Handlebars Templates</h2>
+                <p>If you need to update the markup rendered by Handlebars, you will need to update the actual template files, which can be found in the <code>templates</code> directory. There are two templates in this folder: <code>content.handlebars</code>, which is the template for the majority of the pages in the style guide, and <code>nav.handlebars</code>, which is the template for the main navigation.</p>
+
+                <p>Any time you make a change to either of these files, you will need to recompile them. This is because we precompile all of our templates so the browser doesn't need to do so on every page load. To do this, open up the command line, navigate to the directory for this style guide, and run the following command:</p>
+
+                <pre data-language="Bash"><code class="language-markup">
+                    handlebars templates/ -f templatesCompiled.js
+                </code></pre>
+
+                <p>This will recompile the templates. If there are any errors, you will be able to see them in the developer tools console when you reload the page.</p>
+            </section>
+        </article>
+    </main>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.runtime.js"></script>
+    <script type="text/javascript" src="templatesCompiled.js"></script>
+    <script type="text/javascript" src="helpers.js"></script>
+    <script type="text/javascript" src="nav.js"></script>
+    <script type="text/javascript" src="prism.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,255 @@
+/*
+    STYLE GUIDE PATTERNS
+    ===================================
+    Author: BIG YAM, the Parsons Agency
+    Website: www.bigyam.com
+*/
+
+
+/*-------------------------------------------------------------------------------*/
+/*--GLOBAL STYLES----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------*/
+
+body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-family: "Lato", sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+a {
+    color: #00aed7;
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+code {
+    background-color: #F0F4F5;
+    padding: 3px 5px;
+    display: inline-block;
+}
+
+.prevent-scroll { overflow: hidden; }
+
+
+
+/*-------------------------------------------------------------------------------*/
+/*--MAIN NAVIGATION--------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------*/
+
+.style-menu {
+    background-color: #F0F4F5;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 60px;
+    position: fixed;
+    z-index: 9;
+    overflow-y: auto;
+    transition: transform 0.3s;
+    transform: translateY(-100%);
+}
+
+.style-menu.is-open {
+    transform: translateY(0);
+}
+
+.style-menu-header {
+    padding: 25px;
+    text-align: center;
+}
+
+.style-menu-logo {
+    width: 100px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.style-menu-title { vertical-align: middle; }
+
+.style-menu-item {
+    padding: 10px 25px;
+    display: block;
+    color: #737373;
+}
+
+.style-menu-item:hover,
+.style-menu-item:focus {
+    background-color: #E2E2E2;
+}
+
+.style-menu-item.style-menu-has-submenu:after {
+    content: '';
+    display: inline-block;
+    background-color: transparent;
+    width: 0;
+    height: 0;
+    margin-top: 10px;
+    border-top: 5px solid #a4a4a4;
+    border-right: 3px solid transparent;
+    border-left: 3px solid transparent;
+    vertical-align: middle;
+    float: right;
+}
+
+.style-submenu {
+    background-color: #EAEAEA;
+    display: none;
+}
+
+.style-submenu .style-menu-item { padding-left: 40px; }
+
+.style-menu-button {
+    background-color: #00aed7;
+    width: 100%;
+    bottom: 0;
+    padding: 20px 50px;
+    position: fixed;
+    z-index: 99;
+    cursor: pointer;
+    border: none;
+    border-top: 1px solid #77d6eb;
+    border-radius: 0;
+    box-shadow: none;
+    color: #fff;
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+}
+
+
+
+/*-------------------------------------------------------------------------------*/
+/*--CONTENT HEADER---------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------*/
+
+.style-wrapper {
+    margin-bottom: 60px;
+}
+
+.style-masthead {
+    background-color: #00aed7;
+    padding: 25px;
+    color: #fff;
+}
+
+.style-breadcrumbs {
+    color: rgba(255,255,255,0.5);
+}
+
+.style-name {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 100;
+    line-height: 1;
+}
+
+
+
+/*-------------------------------------------------------------------------------*/
+/*--CONTENT STYLES---------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------*/
+
+.style-content {
+    padding: 25px;
+}
+
+.style-description {
+    color: #8D8D8D;
+    font-size: 18px;
+}
+
+.style-headline {
+    margin-top: 50px;
+}
+
+.style-badge {
+    background-color: #4CAF50;
+    margin-left: 15px;
+    padding: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.style-badge-red { background-color: #F44336; }
+.style-badge-yellow { background-color: #FFC107; }
+
+div.prism-show-language > div.prism-show-language-label {
+    background-color: #F5F2F0 !important;
+    color: #8D8D8D !important;
+    margin-top: -20px !important;
+    border-radius: 2px 2px 0 0 !important;
+}
+
+.style-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.style-flex > section { margin-right: 100px; }
+
+.section-link {
+    margin-right: 10px;
+    margin-left: -20px;
+    padding-right: 5px;
+    position: absolute;
+    display: inline-block;
+    color: #ccc;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.section-link:hover,
+.section-link:focus { color: #00aed7; }
+
+
+
+/*-------------------------------------------------------------------------------*/
+/*--RESPONSIVE STYLES------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------*/
+
+@media screen and (min-width: 600px) {
+    .style-masthead { padding: 50px; }
+
+    .style-name { font-size: 60px; }
+
+    .style-content { padding: 50px; }
+
+    .section-link {
+        margin-right: 20px;
+        margin-left: -30px;
+        padding-right: 15px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .style-menu {
+        width: 250px;
+        margin-bottom: 0;
+        transform: translateY(0);
+    }
+
+    .style-menu-item { padding: 5px 25px; }
+
+    .style-menu-button { display: none; }
+
+    .style-wrapper {
+        margin-bottom: 0;
+        margin-left: 250px;
+    }
+}

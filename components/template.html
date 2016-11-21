@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template | Handlebars Style Guide</title>
+    <link rel="stylesheet" type="text/css" href="../patterns.css">
+    <link rel="stylesheet" type="text/css" href="../prism.css">
+</head>
+<body>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.runtime.js"></script>
+    <script type="text/javascript" src="../templatesCompiled.js"></script>
+    <script type="text/javascript" src="../helpers.js"></script>
+    <script type="text/javascript" src="../nav.js"></script>
+    <script type="text/javascript" src="../prism.js"></script>
+
+    <script>
+        var context = {
+            'category' : 'Components',
+            'title' : 'Template',
+            'description' : 'Description',
+            'sections' : [
+                {
+                    'sectionName' : 'Base',
+                    'sectionIdentifier' : 'base',
+                    'sectionStatus' : 'Ready',
+                    'sectionBadge' : '',
+                    'snippets' : [
+                        {
+                            'snippetDescription' : 'Snippet description',
+                            'snippetLanguage' : '',
+                            'snippetCode' : '<button type="button" class="button">Click Me</button>'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var templateScript = Handlebars.templates.content(context);
+
+        $('body').append(templateScript);
+    </script>
+    
+</body>
+</html>

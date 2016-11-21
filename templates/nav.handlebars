@@ -1,0 +1,28 @@
+<!-- STYLE GUIDE NAVIGATION TEMPLATE -->
+
+<nav class="style-menu">
+    <header class="style-menu-header">
+        <!--
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 221 62.58" class="style-menu-logo">
+            <title>Logo</title>
+            <path />
+        </svg>
+        -->
+        <span class="style-menu-title">Style Guide</span>
+    </header>
+    <ul>
+        {{#each navItems}}
+            <li><a href="{{navLink}}" class="style-menu-item {{#if navSubMenu}}style-menu-has-submenu{{/if}}">{{navTitle}}</a>
+                {{#if navSubMenu}}
+                    <ul class="style-submenu">
+                        {{#each navSubMenu}}
+                            <li><a href="{{subMenuLink}}" class="style-menu-item">{{subMenuTitle}}</a></li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+</nav>
+
+<button type="button" class="style-menu-button">Open Menu</button>

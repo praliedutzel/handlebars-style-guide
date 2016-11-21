@@ -1,0 +1,36 @@
+<!-- STYLE GUIDE CONTENT TEMPLATE -->
+
+<main class="style-wrapper">
+    <header class="style-masthead">
+        <div class="style-breadcrumbs">
+            {{category}}
+        </div>
+
+        <h1 class="style-name">{{title}}</h1>
+    </header>
+
+    <article class="style-content">
+        <p class="style-description">{{{description}}}</p>
+
+        {{#each sections}}
+            <section id="{{sectionIdentifier}}">
+                <a href="#{{sectionIdentifier}}" class="section-link">#</a>
+                <h2 class="style-headline">{{sectionName}} <span class="style-badge {{sectionBadge}}">Status: {{sectionStatus}}</span></h2>
+
+                {{#each snippets}}
+                    <p>{{{snippetDescription}}}</p>
+
+                    {{#match snippetLanguage "JavaScript || SCSS"}}
+                        <pre><code class="language-{{toLowerCase snippetLanguage}}">
+                            {{snippetCode}}
+                        </code></pre>
+                    {{else}}
+                        <pre data-language="{{snippetLanguage}}"><code class="language-markup">
+                            {{snippetCode}}
+                        </code></pre>
+                    {{/match}}
+                {{/each}}
+            </section>
+        {{/each}}
+    </article>
+</main>
